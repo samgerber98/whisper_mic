@@ -191,6 +191,9 @@ class WhisperMic:
             if self.save_file:
                 # os.remove(audio_data)
                 self.file.write(predicted_text)
+        else:
+            print ('audio not loud enough, continuing')
+            self.result_queue.put_nowait('[audio not loud enough]')
 
 
     def listen_loop(self, dictate: bool = False, phrase_time_limit=None) -> None:
@@ -213,7 +216,9 @@ class WhisperMic:
     def listen(self, timeout = None, phrase_time_limit=None):
         self.logger.info("Listening...")
         self.__listen_handler(timeout, phrase_time_limit)
+        print ('--> made it past the __listen_handler')
         while True:
+            # print ('waiting for some results')
             if not self.result_queue.empty():
                 return self.result_queue.get()
 
