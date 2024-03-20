@@ -7,7 +7,7 @@ import os
 import time
 import tempfile
 import platform
-import pynput.keyboard
+# import pynput.keyboard
 # from ctypes import *
 
 from whisper_mic.utils import get_logger
@@ -33,7 +33,8 @@ class WhisperMic:
         self.save_file = save_file
         self.verbose = verbose
         self.english = english
-        self.keyboard = pynput.keyboard.Controller()
+        # self.keyboard = pynput.keyboard.Controller()
+        self.keyboard = None
 
         self.platform = platform.system()
 
