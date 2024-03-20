@@ -83,7 +83,10 @@ class WhisperMic:
     def __setup_mic(self, mic_index):
         if mic_index is None:
             self.logger.info("No mic index provided, using default")
-        self.source = sr.Microphone(sample_rate=16000, device_index=mic_index)
+        else:
+            self.logger.info(f"Initializing mic {mic_index}...")
+        # self.source = sr.Microphone(sample_rate=16000, device_index=mic_index)
+        self.source = sr.Microphone(device_index=mic_index)
 
         self.recorder = sr.Recognizer()
         self.recorder.energy_threshold = self.energy
